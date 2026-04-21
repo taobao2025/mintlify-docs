@@ -1,0 +1,46 @@
+---
+title: 'DELETE /plants/{id} — Remove a plant from the store'
+description: 'Permanently delete a single plant from the store by its integer ID. Returns 204 No Content on success. This action cannot be undone.'
+---
+
+The `DELETE /plants/{id}` endpoint removes a single plant from the store based on its ID. This operation is permanent — once a plant is deleted, it cannot be recovered. A valid Bearer token is required.
+
+<Warning>
+  Deleting a plant is irreversible. Confirm you have the correct plant ID before sending this request.
+</Warning>
+
+## Path parameters
+
+<ParamField path="id" type="integer" required>
+  The unique identifier of the plant to delete.
+</ParamField>
+
+## Response
+
+### 204 — No content
+
+The plant was successfully deleted. The response body is empty.
+
+### 400 — Error
+
+<ResponseField name="error" type="integer" required>
+  An integer error code identifying the problem.
+</ResponseField>
+
+<ResponseField name="message" type="string" required>
+  A human-readable description of the error.
+</ResponseField>
+
+## Example
+
+<CodeGroup>
+
+```bash cURL
+curl --request DELETE \
+  --url 'http://sandbox.mintlify.com/plants/42' \
+  --header 'Authorization: Bearer <token>'
+```
+
+</CodeGroup>
+
+A successful request returns a `204 No Content` response with an empty body.

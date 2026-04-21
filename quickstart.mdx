@@ -1,0 +1,78 @@
+---
+title: "Quickstart: publish your first Mintlify docs site"
+description: "Clone your docs repo, install the Mintlify CLI to preview locally, customize your branding in docs.json, and push to go live in three steps."
+---
+
+Mintlify connects to your GitHub repository and deploys your documentation automatically every time you push. This guide walks you through cloning your docs locally, previewing changes in your browser, and going live with your first publish.
+
+<Steps>
+  <Step title="Set up your local environment">
+    During onboarding, Mintlify creates a GitHub repository with your documentation content. Find the link to your repository in your [dashboard](https://dashboard.mintlify.com).
+
+    Clone the repository to your machine by following the [Cloning a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) guide in the GitHub docs.
+
+    Once cloned, install the Mintlify CLI and start the local preview server:
+
+    ```bash
+    npm i -g mint
+    ```
+
+    Navigate to your docs directory where your `docs.json` file is located, then run:
+
+    ```bash
+    mint dev
+    ```
+
+    Open `http://localhost:3000` in your browser to see your docs.
+
+    <Tip>
+      The preview server updates automatically as you save changes to your files.
+    </Tip>
+  </Step>
+
+  <Step title="Customize your site">
+    Install the Mintlify GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app). This app handles all deployments automatically — no CI/CD configuration required.
+
+    While you're set up locally, make your first customization by updating your site name and brand colors:
+
+    1. Open `docs.json` in your editor.
+    2. Change the `"name"` field to your project name.
+    3. Update the `"colors"` object to match your brand.
+    4. Save the file — your preview at `http://localhost:3000` updates instantly.
+
+    <Tip>
+      Try changing the `"primary"` color first to see an immediate visual difference across your entire site.
+    </Tip>
+  </Step>
+
+  <Step title="Publish your docs">
+    When you're ready to go live, commit your changes and push to your default branch:
+
+    ```bash
+    git add .
+    git commit -m "Initial docs customization"
+    git push
+    ```
+
+    The Mintlify GitHub app picks up your push and deploys your changes automatically. Your docs are live in moments.
+  </Step>
+</Steps>
+
+## Next steps
+
+With your docs live, explore these areas to build out your site:
+
+<CardGroup cols={2}>
+  <Card title="Write content" icon="pen-to-square" href="/essentials/markdown">
+    Learn MDX syntax and start writing rich documentation pages.
+  </Card>
+  <Card title="Customize style" icon="palette" href="/essentials/settings">
+    Fine-tune your colors, logo, fonts, and layout in `docs.json`.
+  </Card>
+  <Card title="Add code examples" icon="square-code" href="/essentials/code">
+    Include syntax-highlighted, multi-language code blocks.
+  </Card>
+  <Card title="API documentation" icon="code" href="/api-reference/introduction">
+    Auto-generate interactive API docs from an OpenAPI specification.
+  </Card>
+</CardGroup>

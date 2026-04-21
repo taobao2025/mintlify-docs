@@ -1,0 +1,92 @@
+---
+title: 'Plant Store webhook — receive new plant notifications'
+description: 'Get notified whenever a new plant is added to the store. Configure a webhook endpoint to receive POST requests with the full NewPlant payload.'
+---
+
+The Plant Store API fires a webhook whenever a new plant is added to the store. Instead of polling `GET /plants`, you can register a webhook URL and receive a `POST` request with the new plant's data in real time. Your server must return a `200` status code to acknowledge receipt.
+
+## Webhook URL
+
+```
+POST /plant/webhook
+```
+
+The Plant Store API sends a `POST` request to your configured endpoint each time a new plant is created.
+
+## Payload
+
+The request body contains a `NewPlant` object — a Plant with an additional `id` field.
+
+<ResponseField name="id" type="integer" required>
+  The unique identifier assigned to the newly added plant.
+</ResponseField>
+
+<ResponseField name="name" type="string" required>
+  The name of the new plant.
+</ResponseField>
+
+<ResponseField name="tag" type="string">
+  An optional tag describing the type of plant.
+</ResponseField>
+
+## Receiving webhooks
+
+When the Plant Store API sends a webhook to your endpoint, your server should:
+
+1. Parse the JSON body from the incoming `POST` request.
+2. Process the `NewPlant` payload as needed for your application.
+3. Return an HTTP `200` status code to confirm receipt.
+
+If your server does not return `200`, the Plant Store API may retry the delivery.
+
+<Note>
+  Respond to webhook requests as quickly as possible. If your processing logic is time-intensive, acknowledge the webhook immediately and handle the work asynchronously.
+</Note>
+
+## Example payload
+
+```json
+{
+  "id": 42,
+  "name": "Peace Lily",
+  "tag": "indoor"
+}
+```
+
+## Example handler
+
+<CodeGroup>
+
+```javascript Node.js (Express)
+const express = require('express');
+const app = express();
+
+app.use(express.json());
+
+app.post('/plant/webhook', (req, res) => {
+  const plant = req.body;
+  console.log('New plant added:', plant);
+  // Handle the event
+  res.sendStatus(200);
+});
+
+app.listen(3000);
+```
+
+```python Python (Flask)
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+
+@app.route('/plant/webhook', methods=['POST'])
+def handle_webhook():
+    plant = request.get_json()
+    print('New plant added:', plant)
+    # Handle the event
+    return '', 200
+
+if __name__ == '__main__':
+    app.run(port=3000)
+```
+
+</CodeGroup>

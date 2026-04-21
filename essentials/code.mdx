@@ -1,0 +1,109 @@
+---
+title: 'Add syntax-highlighted code blocks to your Mintlify docs'
+description: 'Display inline code, fenced code blocks with syntax highlighting, titled snippets, and multi-language tab groups using the CodeGroup component in Mintlify.'
+---
+
+Code blocks in Mintlify support syntax highlighting for dozens of languages, optional filenames, line highlighting, and grouped tabs for showing the same example in multiple languages. Wrapping code correctly makes it easier for readers to copy, scan, and understand your examples.
+
+## Inline code
+
+Enclose a word or short phrase in backticks to render it as inline code:
+
+```md
+To denote a `word` or `phrase` as code, enclose it in backticks (`).
+```
+
+Use inline code for file names, command names, parameter names, and short expressions referenced within a sentence.
+
+## Fenced code blocks
+
+Wrap multi-line code in triple backticks and specify the language immediately after the opening fence to enable syntax highlighting:
+
+````md
+```typescript
+const greeting: string = 'Hello, world!';
+console.log(greeting);
+```
+````
+
+Mintlify supports all common languages including `typescript`, `javascript`, `python`, `bash`, `json`, `yaml`, `sql`, `go`, `rust`, and many more.
+
+## Code block titles
+
+Add a filename or title after the language tag to label the block:
+
+```java HelloWorld.java
+class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}
+```
+
+````md
+```java HelloWorld.java
+class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}
+```
+````
+
+The title appears as a tab above the code block and helps readers understand where the code belongs.
+
+## Multi-language code groups
+
+Use `<CodeGroup>` to display the same code in multiple languages or package managers as selectable tabs. Each child code block becomes one tab, labeled by its title.
+
+<CodeGroup>
+
+```bash npm
+npm install @mintlify/components
+```
+
+```bash yarn
+yarn add @mintlify/components
+```
+
+```bash pnpm
+pnpm add @mintlify/components
+```
+
+</CodeGroup>
+
+````mdx
+<CodeGroup>
+
+```bash npm
+npm install @mintlify/components
+```
+
+```bash yarn
+yarn add @mintlify/components
+```
+
+```bash pnpm
+pnpm add @mintlify/components
+```
+
+</CodeGroup>
+````
+
+<Tip>
+  Always add a title to every code block inside a `<CodeGroup>`. The title becomes the tab label — without it, readers can't distinguish between tabs.
+</Tip>
+
+## Bash and terminal examples
+
+Use the `bash` language tag for shell commands. Add a `$` prefix to visually distinguish commands from output:
+
+```bash
+$ npm run build
+> my-app@1.0.0 build
+> tsc && vite build
+```
+
+<Note>
+  If you include expected output alongside commands, use a plain code block without a language tag, or use `text`, so the output isn't styled as executable code.
+</Note>

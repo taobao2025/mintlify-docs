@@ -1,0 +1,109 @@
+---
+title: 'Structure your docs sidebar with Mintlify navigation'
+description: 'The navigation field in docs.json structures your sidebar into tabs, groups, and pages — controlling what visitors see and how they move through your docs.'
+---
+
+Navigation in Mintlify is defined entirely inside `docs.json`. The `navigation` field controls your sidebar: what pages appear, how they are grouped, and what order they follow. Pages you add to your project will not appear in the sidebar until you register them in `docs.json`.
+
+## Navigation syntax
+
+Navigation follows a three-level hierarchy: tabs contain groups, and groups contain pages. You reference pages by their relative file path — omit the `.mdx` extension.
+
+<CodeGroup>
+
+```json Standard navigation
+"navigation": {
+  "tabs": [
+    {
+      "tab": "Docs",
+      "groups": [
+        {
+          "group": "Getting started",
+          "pages": ["quickstart"]
+        }
+      ]
+    }
+  ]
+}
+```
+
+```json Nested groups
+"navigation": {
+  "tabs": [
+    {
+      "tab": "Docs",
+      "groups": [
+        {
+          "group": "Getting started",
+          "pages": [
+            "quickstart",
+            {
+              "group": "Reference pages",
+              "pages": ["reference/overview"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+</CodeGroup>
+
+<Note>
+  Navigation syntax is recursive. You can nest groups inside groups to any depth, which is useful for organizing large reference sections.
+</Note>
+
+## Folders
+
+Organize your MDX files into folders to create clean URL paths. A file at `guides/quickstart.mdx` maps to the URL `https://yoursite.com/guides/quickstart`.
+
+To reference a page inside a folder, use the folder path in `docs.json`:
+
+```json Navigation with folders
+"navigation": {
+  "tabs": [
+    {
+      "tab": "Docs",
+      "groups": [
+        {
+          "group": "Guides",
+          "pages": ["guides/quickstart", "guides/authentication"]
+        }
+      ]
+    }
+  ]
+}
+```
+
+<Warning>
+  Do not name a top-level folder `api`. Mintlify runs on Next.js, which reserves the top-level `/api` path for internal server routes. Use a name like `api-reference` instead.
+</Warning>
+
+## Hidden pages
+
+MDX files that are not listed in `docs.json` are not shown in the sidebar, but they remain accessible. Visitors can find them through the search bar or by navigating directly to their URL.
+
+This is useful for draft pages, supplementary reference material, or content you want to share via direct link without surfacing it in the main navigation.
+
+<AccordionGroup>
+  <Accordion title="Hide a page from the sidebar using frontmatter">
+    Add `hidden: true` to a page's frontmatter to remove it from the sidebar while keeping it accessible by URL and search:
+
+    ```yaml
+    ---
+    title: 'Internal reference'
+    hidden: true
+    ---
+    ```
+  </Accordion>
+  <Accordion title="Exclude a page from the site entirely">
+    To prevent a file from being published at all — not accessible by URL, search, or direct link — add it to a `.mintignore` file in your docs root. This file uses `.gitignore` syntax:
+
+    ```
+    drafts/
+    *.draft.mdx
+    ```
+  </Accordion>
+</AccordionGroup>

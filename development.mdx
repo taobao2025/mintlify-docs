@@ -1,0 +1,95 @@
+---
+title: "Preview your docs locally with the Mintlify CLI"
+description: "Install the Mintlify CLI to run a live preview server on localhost, validate internal links, and keep your CLI version in sync with your production site."
+---
+
+The Mintlify CLI gives you a live preview of your documentation site running on your machine. As you edit MDX files and update `docs.json`, the preview server reflects your changes instantly — no need to push to see how things look.
+
+<Info>
+  **Prerequisites:**
+  - Node.js v19 or higher
+  - A docs repository containing a `docs.json` file
+</Info>
+
+## Install the CLI
+
+Run the following command to install the Mintlify CLI globally:
+
+```bash
+npm i -g mint
+```
+
+## Run the preview server
+
+Navigate to your docs directory where your `docs.json` file is located, then start the local server:
+
+```bash
+mint dev
+```
+
+Your documentation is now available at `http://localhost:3000`.
+
+## Use a custom port
+
+By default, Mintlify uses port 3000. To run the preview on a different port, pass the `--port` flag:
+
+```bash
+mint dev --port 3333
+```
+
+If the port you specify is already in use, Mintlify automatically tries the next available port:
+
+```
+Port 3000 is already in use. Trying 3001 instead.
+```
+
+## Keep your CLI version current
+
+Each CLI release corresponds to a specific version of Mintlify. If your local preview looks different from your published site, update the CLI to match:
+
+```bash
+npm mint update
+```
+
+## Validate links
+
+Before pushing, check your docs for broken internal links:
+
+```bash
+mint broken-links
+```
+
+The CLI reports any links that point to missing pages or anchors, so you can fix them before they reach production.
+
+## Deployment
+
+Mintlify deploys your docs automatically when you push to your connected GitHub repository. Install the [Mintlify GitHub app](https://dashboard.mintlify.com/settings/organization/github-app) from your dashboard to enable this. When a deployment completes successfully, you'll see a confirmation in your pull request checks.
+
+<Note>
+  You only need to install the GitHub app once per organization. After that, every push to your default branch triggers a deployment automatically.
+</Note>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title='Error: Could not load the "sharp" module using the darwin-arm64 runtime'>
+    This error usually means your Node.js version is too old. To resolve it:
+
+    1. Remove the current CLI installation: `npm remove -g mint`
+    2. Upgrade Node.js to v19 or higher.
+    3. Reinstall the CLI: `npm i -g mint`
+  </Accordion>
+
+  <Accordion title="Issue: Encountering an unknown error">
+    Go to the root of your home directory and delete the `~/.mintlify` folder, then run `mint dev` again:
+
+    ```bash
+    rm -rf ~/.mintlify
+    mint dev
+    ```
+
+    This clears the CLI's local cache and resolves most unexpected errors.
+  </Accordion>
+</AccordionGroup>
+
+For a full list of changes in each release, see the [CLI changelog](https://www.npmjs.com/package/mintlify?activeTab=versions).

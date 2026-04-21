@@ -1,0 +1,106 @@
+---
+title: 'Add images, video, and media to your Mintlify docs'
+description: 'Add images with Markdown syntax or the Frame component, embed videos with iframes, control sizing with HTML, and serve light and dark mode image variants.'
+---
+
+Images and media make documentation easier to follow. Mintlify supports standard Markdown image syntax for quick embeds, the `<Frame>` component for styled containers with optional captions, and HTML elements for videos and other media. Images must be under 5 MB — for larger files, host them on an external service and reference the URL.
+
+## Images with Markdown
+
+Use standard Markdown syntax to embed an image:
+
+```md
+![Alt text describing the image](/images/screenshot.png)
+```
+
+Always include descriptive alt text. Alt text improves accessibility and appears when an image fails to load.
+
+For images hosted externally:
+
+```md
+![Dashboard overview](https://example.com/images/dashboard.png)
+```
+
+<Note>
+  Image files must be under 5 MB. For larger images, host them on a service like [Cloudinary](https://cloudinary.com/) or [Amazon S3](https://aws.amazon.com/s3/) and reference the URL instead.
+</Note>
+
+## Images with HTML
+
+To control width, height, or border radius, use an HTML `<img>` tag directly in your MDX file:
+
+```html
+<img height="200" src="/images/screenshot.png" alt="Screenshot of the settings page" />
+```
+
+You can also apply inline styles:
+
+```html
+<img
+  style={{ borderRadius: '0.5rem' }}
+  src="/images/screenshot.png"
+  alt="Screenshot of the settings page"
+/>
+```
+
+## Frame component
+
+Wrap an image in `<Frame>` to add a styled container with a subtle border and optional caption. This is useful for screenshots where you want to distinguish the image from the surrounding text.
+
+<Frame>
+  <img src="https://mintlify-assets.b-cdn.net/bigbend.jpg" alt="Big Bend National Park landscape" />
+</Frame>
+
+```mdx
+<Frame>
+  <img src="/images/screenshot.png" alt="Settings page showing API configuration" />
+</Frame>
+```
+
+Add a `caption` prop to display a label below the image:
+
+```mdx
+<Frame caption="The API keys page in your dashboard settings.">
+  <img src="/images/api-keys.png" alt="API keys page" />
+</Frame>
+```
+
+## Light and dark mode images
+
+To show different images depending on the reader's color scheme, render two images and use the `dark` class to hide the dark-mode version in light mode (and vice versa):
+
+```html
+<img
+  className="block dark:hidden"
+  src="/images/hero-light.png"
+  alt="Hero image for light mode"
+/>
+<img
+  className="hidden dark:block"
+  src="/images/hero-dark.png"
+  alt="Hero image for dark mode"
+/>
+```
+
+The `block dark:hidden` class shows the image in light mode and hides it in dark mode. The `hidden dark:block` class does the opposite.
+
+## Embedding videos
+
+Use an `<iframe>` to embed a video from YouTube or another platform:
+
+```html
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/4KzFe50RQkQ"
+  title="Getting started with Mintlify"
+  frameBorder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowFullScreen
+  style={{ width: '100%', borderRadius: '0.5rem' }}
+></iframe>
+```
+
+<Tip>
+  Set `width: '100%'` on the iframe style to make the video responsive across screen sizes.
+</Tip>

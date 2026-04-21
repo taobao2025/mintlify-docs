@@ -1,0 +1,143 @@
+---
+title: 'Reusable snippets: share content across Mintlify pages'
+description: 'Write a piece of content once in a snippets file, then import and render it on any page — with optional props for dynamic values.'
+---
+
+Snippets let you maintain a single source of truth for content that appears in multiple places. Instead of copying and pasting the same authentication note, parameter table, or warning across dozens of pages, you write it once in a file under `snippets/` and import it wherever you need it. When the content changes, you update one file and every page reflects the change automatically.
+
+## Creating a snippet
+
+Place your snippet file anywhere inside the `snippets/` directory. Mintlify treats every file in that directory as a snippet — it will not be rendered as a standalone page.
+
+```mdx snippets/api-auth-note.mdx
+All API requests require a valid API key. Pass your key in the `Authorization` header as a Bearer token.
+```
+
+<Note>
+  Any page in the `snippets/` directory is treated as a snippet and will not appear in your site's navigation. If you want to display the content as a standalone page, import the snippet into a regular page file and render it as a component.
+</Note>
+
+## Using a snippet on a page
+
+Import the snippet at the top of your destination file (after the frontmatter) and render it as a JSX component:
+
+```mdx destination-file.mdx
+---
+title: My title
+description: My Description
+---
+
+import ApiAuthNote from '/snippets/api-auth-note.mdx';
+
+## Authentication
+
+<ApiAuthNote />
+```
+
+The snippet renders inline exactly as if you had written the content directly on the page.
+
+## Passing variables to a snippet
+
+Snippets support props. Use `{variableName}` placeholders in the snippet file and pass values when you render the component.
+
+<Steps>
+  <Step title="Define the placeholder in your snippet">
+    ```mdx snippets/my-snippet.mdx
+    Hello world! This is my content I want to reuse across pages. My keyword of the day is {word}.
+    ```
+  </Step>
+  <Step title="Pass the value when you import">
+    ```mdx destination-file.mdx
+    ---
+    title: My title
+    description: My Description
+    ---
+
+    import MySnippet from '/snippets/path/to/my-snippet.mdx';
+
+    ## Header
+
+    Lorem ipsum dolor sit amet.
+
+    <MySnippet word="bananas" />
+    ```
+  </Step>
+</Steps>
+
+## Reusable variables
+
+Export named constants from a snippet file to share values like version numbers or product names across multiple pages.
+
+**Define the variables in your snippet:**
+
+```mdx snippets/path/to/custom-variables.mdx
+export const myName = 'my name';
+
+export const myObject = { fruit: 'strawberries' };
+```
+
+**Import and use them on any page:**
+
+```mdx destination-file.mdx
+---
+title: My title
+description: My Description
+---
+
+import { myName, myObject } from '/snippets/path/to/custom-variables.mdx';
+
+Hello, my name is {myName} and I like {myObject.fruit}.
+```
+
+## Reusable components
+
+For more control over layout and structure, export a component as an arrow function from your snippet file:
+
+```mdx snippets/custom-component.mdx
+export const MyComponent = ({ title }) => (
+  <div>
+    <h1>{title}</h1>
+    <p>... snippet content ...</p>
+  </div>
+);
+```
+
+Then import and render it with props:
+
+```mdx destination-file.mdx
+---
+title: My title
+description: My Description
+---
+
+import { MyComponent } from '/snippets/custom-component.mdx';
+
+Lorem ipsum dolor sit amet.
+
+<MyComponent title={'Custom title'} />
+```
+
+<Warning>
+  MDX does not compile inside the body of an arrow function. Use HTML syntax inside exported components, or use a default export if you need to write MDX markup.
+</Warning>
+
+## Example: shared authentication note
+
+A common pattern is sharing an authentication requirement note across all API reference pages. Create the snippet once:
+
+```mdx snippets/auth-note.mdx
+<Note>
+  All requests must include an `Authorization: Bearer <token>` header. Generate
+  your API key from the **Settings → API Keys** page in your dashboard.
+</Note>
+```
+
+Then import it at the top of each API page:
+
+```mdx
+import AuthNote from '/snippets/auth-note.mdx';
+
+<AuthNote />
+```
+
+When your authentication method changes, update `snippets/auth-note.mdx` and every page that imports it updates automatically.

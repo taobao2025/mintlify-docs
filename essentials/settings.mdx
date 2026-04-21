@@ -1,0 +1,178 @@
+---
+title: 'Global settings reference for your Mintlify docs.json'
+description: 'docs.json controls your site name, navigation, branding, colors, navbar links, footer socials, and appearance — all from a single file.'
+---
+
+Every Mintlify project requires a `docs.json` file at the root of your docs directory. This file controls every aspect of your site's appearance and behavior — from your project name and color palette to navigation structure, logo, and footer links. Changes to `docs.json` take effect immediately in the local preview and on your next deployment.
+
+## Properties
+
+<ResponseField name="name" type="string" required>
+  The name of your project. Used as the global title across your site.
+
+  Example: `"mintlify"`
+</ResponseField>
+
+<ResponseField name="navigation" type="Navigation" required>
+  Defines the tabs, groups, and pages that make up your sidebar. See [Navigation](/essentials/navigation) for the full syntax.
+
+  <Expandable title="Navigation">
+    <ResponseField name="tabs" type="Tab[]">
+      An array of top-level tabs. Each tab contains a label and a list of navigation groups.
+    </ResponseField>
+    <ResponseField name="groups" type="Group[]">
+      An array of navigation groups, each with a `group` label and a `pages` array of relative file paths.
+
+      Example: `[{ "group": "Getting started", "pages": ["quickstart"] }]`
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="logo" type="string or object">
+  Path to your logo image, or an object specifying separate images for light and dark mode.
+
+  <Expandable title="Logo object">
+    <ResponseField name="light" type="string">
+      Path to the logo displayed in light mode.
+    </ResponseField>
+    <ResponseField name="dark" type="string">
+      Path to the logo displayed in dark mode.
+    </ResponseField>
+    <ResponseField name="href" type="string" default="/">
+      The URL the logo links to when clicked.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="favicon" type="string">
+  Path to the favicon image shown in browser tabs.
+
+  Example: `"/favicon.ico"`
+</ResponseField>
+
+<ResponseField name="colors" type="Colors">
+  Hex color codes that define your site's global theme.
+
+  <Expandable title="Colors">
+    <ResponseField name="primary" type="string" required>
+      The primary brand color. Used for highlighted content, section headers, and accents in light mode.
+
+      Example: `"#3B82F6"`
+    </ResponseField>
+    <ResponseField name="light" type="string">
+      The primary color for dark mode. Used for highlighted content, section headers, and accents.
+    </ResponseField>
+    <ResponseField name="dark" type="string">
+      The color used for important buttons.
+    </ResponseField>
+    <ResponseField name="background" type="object">
+      Background color in light and dark mode.
+
+      <Expandable title="Background">
+        <ResponseField name="light" type="string" required>
+          Hex color code for the background in light mode.
+        </ResponseField>
+        <ResponseField name="dark" type="string" required>
+          Hex color code for the background in dark mode.
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="navbar.links" type="NavbarLink[]">
+  An array of links displayed in the top navigation bar.
+
+  <Expandable title="NavbarLink">
+    <ResponseField name="label" type="string">
+      The link label displayed in the navbar.
+
+      Example: `"Community"`
+    </ResponseField>
+    <ResponseField name="href" type="string">
+      The URL the link points to.
+
+      Example: `"https://mintlify.com/community"`
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="navbar.primary" type="object">
+  A primary call-to-action button displayed in the navbar.
+
+  <Expandable title="Primary button">
+    <ResponseField name="type" type='"button" | "github" | "discord"' default="button">
+      The button style. Use `"github"` to show a repo with star count, or `"discord"` to show server member count.
+    </ResponseField>
+    <ResponseField name="label" type="string">
+      Text displayed inside the button. Required when `type` is `"button"`.
+    </ResponseField>
+    <ResponseField name="href" type="string">
+      The URL the button links to, or the GitHub/Discord URL when using those types.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="openapi" type="string | string[]">
+  A URL or relative path to an OpenAPI specification file, or an array of multiple specs.
+
+  <CodeGroup>
+    ```json Absolute URL
+    "openapi": "https://example.com/openapi.json"
+    ```
+    ```json Relative path
+    "openapi": "/openapi.json"
+    ```
+    ```json Multiple specs
+    "openapi": ["https://example.com/openapi1.json", "/openapi2.json"]
+    ```
+  </CodeGroup>
+</ResponseField>
+
+<ResponseField name="footer.socials" type="object">
+  An object mapping social platform keys to their respective URLs. Mintlify renders these as icons in the footer.
+
+  Valid keys: `x`, `website`, `facebook`, `youtube`, `discord`, `slack`, `github`, `linkedin`, `instagram`, `hacker-news`, `medium`, `telegram`, `bluesky`, `threads`, `reddit`, `podcast`.
+
+  Example:
+  ```json
+  "footer": {
+    "socials": {
+      "github": "https://github.com/mintlify",
+      "x": "https://x.com/mintlify"
+    }
+  }
+  ```
+</ResponseField>
+
+<ResponseField name="modeToggle" type="ModeToggle">
+  Configure the dark/light mode toggle behavior.
+
+  <Expandable title="ModeToggle">
+    <ResponseField name="default" type='"light" | "dark"'>
+      Force a specific color mode for first-time visitors. When unset, Mintlify defaults to the user's operating system preference.
+    </ResponseField>
+    <ResponseField name="isHidden" type="boolean" default="false">
+      Set to `true` to hide the mode toggle entirely. Combine with `default` to lock your site to a single mode.
+
+      <CodeGroup>
+        ```json Force dark mode
+        "modeToggle": {
+          "default": "dark",
+          "isHidden": true
+        }
+        ```
+        ```json Force light mode
+        "modeToggle": {
+          "default": "light",
+          "isHidden": true
+        }
+        ```
+      </CodeGroup>
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<Tip>
+  Run `mint dev` after editing `docs.json` to preview your changes at `localhost:3000`. Run `mint validate` to catch configuration errors before deploying.
+</Tip>

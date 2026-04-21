@@ -1,0 +1,156 @@
+---
+title: 'Writing docs with MDX: headings, lists, tables, callouts'
+description: 'Mintlify pages use MDX — standard Markdown plus JSX components. Learn headings, links, lists, tables, blockquotes, callouts, and LaTeX on a single page.'
+---
+
+Mintlify pages are MDX files — standard Markdown with support for JSX components. You can write plain Markdown for most content and drop in Mintlify components wherever you need richer formatting. Everything from headings to tables to callout blocks works out of the box.
+
+## Headings
+
+Use `##` for section headings and `###` for subsections. Each heading automatically generates a page anchor and appears in the table of contents on the right.
+
+```md
+## Section heading
+
+### Subsection heading
+```
+
+<Tip>
+  Avoid using `#` (h1) in your content — Mintlify uses your page `title` frontmatter as the h1 automatically.
+</Tip>
+
+## Text formatting
+
+Wrap text with `**`, `_`, or `~` to apply common styles.
+
+| Style         | Syntax            | Result          |
+| ------------- | ----------------- | --------------- |
+| Bold          | `**bold**`        | **bold**        |
+| Italic        | `_italic_`        | _italic_        |
+| Strikethrough | `~strikethrough~` | ~strikethrough~ |
+
+You can combine these — for example, `**_bold and italic_**` renders as **_bold and italic_**.
+
+For superscript and subscript, use HTML tags directly:
+
+| Style       | Syntax                   | Result                 |
+| ----------- | ------------------------ | ---------------------- |
+| Superscript | `<sup>superscript</sup>` | <sup>superscript</sup> |
+| Subscript   | `<sub>subscript</sub>`   | <sub>subscript</sub>   |
+
+## Links
+
+Wrap link text in `[]` and put the URL in `()` immediately after:
+
+```md
+[link to Google](https://google.com)
+```
+
+For links to other pages in your docs, use root-relative paths without the `.mdx` extension:
+
+```md
+[link to quickstart](/quickstart)
+```
+
+<Note>
+  Avoid relative paths like `../quickstart`. Root-relative paths load faster because Mintlify can pre-optimize them.
+</Note>
+
+## Blockquotes
+
+Add `>` before a paragraph to render it as a blockquote.
+
+**Single line:**
+
+> Dorothy followed her through many of the beautiful rooms in her castle.
+
+```md
+> Dorothy followed her through many of the beautiful rooms in her castle.
+```
+
+**Multiple lines:**
+
+> Dorothy followed her through many of the beautiful rooms in her castle.
+>
+> The Witch bade her clean the pots and kettles and sweep the floor and keep the fire fed with wood.
+
+```md
+> Dorothy followed her through many of the beautiful rooms in her castle.
+>
+> The Witch bade her clean the pots and kettles and sweep the floor and keep the fire fed with wood.
+```
+
+## Lists
+
+**Unordered list** — use `-` or `*`:
+
+```md
+- First item
+- Second item
+- Third item
+```
+
+**Ordered list** — use numbers:
+
+```md
+1. First item
+2. Second item
+3. Third item
+```
+
+## Tables
+
+Use pipes and hyphens to define columns and rows:
+
+```md
+| Column one | Column two | Column three |
+| ---------- | ---------- | ------------ |
+| Cell       | Cell       | Cell         |
+| Cell       | Cell       | Cell         |
+```
+
+## Callout components
+
+Mintlify provides five callout components for surfacing important information. Use them sparingly so they retain impact.
+
+<Note>
+  Use `<Note>` for supplementary context that's helpful but not critical.
+</Note>
+
+<Info>
+  Use `<Info>` for prerequisites, permissions, or related background information.
+</Info>
+
+<Tip>
+  Use `<Tip>` for recommendations and best practices that improve the experience.
+</Tip>
+
+<Warning>
+  Use `<Warning>` for actions that could cause data loss or unexpected behavior.
+</Warning>
+
+<Check>
+  Use `<Check>` to confirm that a step is complete or a condition is met.
+</Check>
+
+```mdx
+<Note>Supplementary context that's safe to skip.</Note>
+
+<Info>Helpful background information or prerequisites.</Info>
+
+<Tip>A recommendation or best practice.</Tip>
+
+<Warning>Something that could cause data loss or break things.</Warning>
+
+<Check>Confirmation that a step is complete.</Check>
+```
+
+## LaTeX
+
+Mintlify supports [LaTeX](https://www.latex-project.org) through the `<Latex>` component:
+
+<Latex>8 x (vk x H1 - H2) = (0,1)</Latex>
+
+```mdx
+<Latex>8 x (vk x H1 - H2) = (0,1)</Latex>
+```

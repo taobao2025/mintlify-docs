@@ -1,0 +1,90 @@
+{
+  "projectType": "saas",
+  "projectName": "Mintlify",
+  "projectDescription": "Mintlify is a documentation platform that lets teams publish beautiful, AI-powered documentation sites from MDX files with zero infrastructure management.",
+  "theme": "luma",
+  "primaryColor": "#54545c",
+  "lightColor": null,
+  "darkColor": null,
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Guides",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "index",
+              "quickstart",
+              "development"
+            ]
+          },
+          {
+            "group": "Customize",
+            "pages": [
+              "essentials/settings",
+              "essentials/navigation"
+            ]
+          },
+          {
+            "group": "Write Content",
+            "pages": [
+              "essentials/markdown",
+              "essentials/code",
+              "essentials/images",
+              "essentials/reusable-snippets"
+            ]
+          },
+          {
+            "group": "AI Tools",
+            "pages": [
+              "ai-tools/cursor",
+              "ai-tools/claude-code",
+              "ai-tools/windsurf"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "groups": [
+          {
+            "group": "Overview",
+            "pages": [
+              "api-reference/introduction"
+            ]
+          },
+          {
+            "group": "Endpoints",
+            "pages": [
+              "api-reference/endpoint/get",
+              "api-reference/endpoint/create",
+              "api-reference/endpoint/delete",
+              "api-reference/endpoint/webhook"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "MDX-based documentation authoring with rich component library",
+    "Automatic deployment via GitHub integration — push to publish",
+    "Local preview with Mintlify CLI (`mint dev`)",
+    "AI-assisted writing with Cursor, Claude Code, and Windsurf integrations",
+    "OpenAPI-based API reference generation",
+    "Customizable branding: colors, logos, navigation structure",
+    "Reusable content snippets",
+    "Built-in link validation (`mint broken-links`)"
+  ],
+  "publicApiSurface": [
+    "mint dev — start local preview server",
+    "mint dev --port <number> — use a custom port",
+    "mint broken-links — validate internal links",
+    "mint update — update the CLI to the latest version",
+    "docs.json — site configuration file (name, colors, navigation, logo, favicon, openapi)",
+    "navigation.tabs / navigation.groups / navigation.pages — navigation structure schema",
+    "openapi field — link to OpenAPI spec for auto-generated API docs",
+    "npx skills add <url> — install AI writing skill for your editor"
+  ]
+}

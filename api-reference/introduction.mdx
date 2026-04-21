@@ -1,0 +1,59 @@
+---
+title: 'Plant Store API: authentication, endpoints, and webhooks'
+description: "Explore the Plant Store API — a sample API that demonstrates Mintlify's API reference capabilities including authentication, endpoints, and webhooks."
+---
+
+The Plant Store API is a sample REST API that Mintlify uses to demonstrate its API reference features. You can use this section as a template for your own API documentation, whether you prefer to generate pages from an OpenAPI specification or author them manually with MDX components.
+
+## Two ways to build API docs
+
+Mintlify supports two approaches for publishing API reference documentation:
+
+<CardGroup cols={2}>
+  <Card title="OpenAPI specification" icon="file-code" href="https://mintlify.com/docs/api-playground/openapi/setup">
+    Generate API pages automatically from an OpenAPI (Swagger) spec file. Mintlify reads your spec and renders interactive endpoint pages with a built-in playground.
+  </Card>
+  <Card title="MDX components" icon="pen-nib" href="https://mintlify.com/docs/api-playground/mdx/configuration">
+    Write API pages manually using Mintlify's `<ParamField>` and `<ResponseField>` components. Useful when you need full control over structure and content.
+  </Card>
+</CardGroup>
+
+This section uses the following OpenAPI specification file as its source of truth:
+
+<Card
+  title="Plant Store OpenAPI spec"
+  icon="leaf"
+  href="/api-reference/openapi.json"
+>
+  View the full OpenAPI specification for the Plant Store API
+</Card>
+
+## Base URL
+
+All requests go to the following base URL:
+
+```
+http://sandbox.mintlify.com
+```
+
+## Authentication
+
+Every endpoint requires a Bearer token. Pass your token in the `Authorization` header with each request:
+
+```bash
+Authorization: Bearer <token>
+```
+
+The OpenAPI spec declares this requirement globally using the `bearerAuth` security scheme:
+
+```json
+"security": [
+  {
+    "bearerAuth": []
+  }
+]
+```
+
+<Note>
+  The Plant Store API is a sample API intended for demonstration purposes only. It is not a production service, and requests made to it may not return real data.
+</Note>

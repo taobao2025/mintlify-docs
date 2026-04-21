@@ -1,0 +1,66 @@
+---
+title: 'POST /plants — Add and create a plant in the store'
+description: 'POST /plants — creates a new plant in the store. Send a JSON body with a required name field and an optional tag to categorize the plant by type.'
+---
+
+The `POST /plants` endpoint creates a new plant in the store. You must send a JSON request body containing at least a `name` field. You can optionally include a `tag` to categorize the plant by type. A valid Bearer token is required for all requests.
+
+## Request body
+
+<ParamField body="name" type="string" required>
+  The name of the plant to add to the store.
+</ParamField>
+
+<ParamField body="tag" type="string">
+  An optional tag that specifies the type of plant (for example, `"tropical"` or `"succulent"`).
+</ParamField>
+
+## Response
+
+### 200 — Success
+
+Returns the created Plant object.
+
+<ResponseField name="name" type="string" required>
+  The name of the newly created plant.
+</ResponseField>
+
+<ResponseField name="tag" type="string">
+  The tag associated with the plant, if one was provided.
+</ResponseField>
+
+### 400 — Error
+
+<ResponseField name="error" type="integer" required>
+  An integer error code identifying the problem.
+</ResponseField>
+
+<ResponseField name="message" type="string" required>
+  A human-readable description of the error.
+</ResponseField>
+
+## Example
+
+<CodeGroup>
+
+```bash cURL
+curl --request POST \
+  --url 'http://sandbox.mintlify.com/plants' \
+  --header 'Authorization: Bearer <token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "name": "Bird of Paradise",
+    "tag": "tropical"
+  }'
+```
+
+</CodeGroup>
+
+**Sample response**
+
+```json
+{
+  "name": "Bird of Paradise",
+  "tag": "tropical"
+}
+```

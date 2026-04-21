@@ -1,0 +1,63 @@
+---
+title: 'GET /plants — Retrieve all plants from the store'
+description: 'Retrieve a list of all plants you have access to in the store. Pass an optional limit parameter to control how many results are returned.'
+---
+
+The `GET /plants` endpoint returns an array of Plant objects from the store. You can optionally pass a `limit` query parameter to cap the number of results. All requests must include a valid Bearer token in the `Authorization` header.
+
+## Query parameters
+
+<ParamField query="limit" type="integer">
+  The maximum number of plants to return. Omit this parameter to retrieve all available results.
+</ParamField>
+
+## Response
+
+### 200 — Success
+
+Returns an array of Plant objects.
+
+<ResponseField name="name" type="string" required>
+  The name of the plant.
+</ResponseField>
+
+<ResponseField name="tag" type="string">
+  An optional tag that specifies the type of plant.
+</ResponseField>
+
+### 400 — Error
+
+<ResponseField name="error" type="integer" required>
+  An integer error code identifying the problem.
+</ResponseField>
+
+<ResponseField name="message" type="string" required>
+  A human-readable description of the error.
+</ResponseField>
+
+## Example
+
+<CodeGroup>
+
+```bash cURL
+curl --request GET \
+  --url 'http://sandbox.mintlify.com/plants?limit=10' \
+  --header 'Authorization: Bearer <token>'
+```
+
+</CodeGroup>
+
+**Sample response**
+
+```json
+[
+  {
+    "name": "Monstera deliciosa",
+    "tag": "tropical"
+  },
+  {
+    "name": "Cactus",
+    "tag": "succulent"
+  }
+]
+```

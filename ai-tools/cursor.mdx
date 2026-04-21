@@ -1,0 +1,50 @@
+---
+title: "AI-assisted doc writing in Cursor with Mintlify skill"
+description: "Configure Cursor's AI features with the Mintlify skill to draft, edit, and maintain documentation using component reference and style guidance."
+---
+
+Cursor's AI-powered editor can help you write and maintain your Mintlify documentation more efficiently. By installing the Mintlify skill, you give Cursor direct access to component references, writing standards, and workflow guidance — so its suggestions stay accurate and consistent with Mintlify conventions.
+
+## Prerequisites
+
+- [Cursor](https://cursor.sh) editor installed
+
+## Setup
+
+<Steps>
+  <Step title="Open your docs directory in Cursor">
+    Open the root of your documentation repository — the folder that contains `docs.json` — as your Cursor workspace.
+  </Step>
+
+  <Step title="Install the Mintlify skill">
+    In the integrated terminal, run:
+
+    ```bash
+    npx skills add https://mintlify.com/docs
+    ```
+
+    This installs the Mintlify skill, which gives Cursor:
+
+    - Mintlify component reference (`<Steps>`, `<Card>`, `<CodeGroup>`, and more)
+    - Writing standards and style guidance
+    - Workflow guidance for documentation tasks
+  </Step>
+
+  <Step title="Customize project instructions">
+    Edit `AGENTS.md` in your project root to add project-specific context:
+
+    - Product terminology and preferred usage (for example, "workspace" not "project")
+    - Style preferences specific to your docs
+    - Content boundaries — what should and shouldn't be documented
+
+    Cursor reads `AGENTS.md` automatically, so any context you add here shapes every AI suggestion in your project.
+  </Step>
+
+  <Step title="Start writing with Cursor">
+    Open any MDX file and use Cursor's AI features to draft, edit, or refactor documentation. Cursor will apply Mintlify component syntax and your project's style preferences automatically.
+
+    <Tip>
+      Ask Cursor to generate a new page, add a `<Steps>` section, or rewrite a paragraph in active voice — it will follow the Mintlify skill guidance you installed.
+    </Tip>
+  </Step>
+</Steps>

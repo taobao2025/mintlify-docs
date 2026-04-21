@@ -1,0 +1,64 @@
+---
+title: "AI-assisted doc writing in Claude Code with Mintlify skill"
+description: "Configure Claude Code with the Mintlify skill to draft, edit, and maintain documentation using component reference, style guidance, and workflow support."
+---
+
+Claude Code is a terminal-based AI coding assistant that can help you write and maintain your Mintlify documentation from the command line. Installing the Mintlify skill gives Claude Code the component reference and writing standards it needs to produce accurate, on-brand docs.
+
+## Prerequisites
+
+- Active Claude subscription (Pro, Max, or API access)
+
+## Setup
+
+<Steps>
+  <Step title="Install Claude Code">
+    If you haven't already, install Claude Code globally:
+
+    ```bash
+    npm install -g @anthropic-ai/claude-code
+    ```
+  </Step>
+
+  <Step title="Open your docs directory">
+    Navigate to the root of your documentation repository — the folder that contains `docs.json` — before running Claude Code so it has the right working context.
+  </Step>
+
+  <Step title="Install the Mintlify skill">
+    In your docs directory, run:
+
+    ```bash
+    npx skills add https://mintlify.com/docs
+    ```
+
+    This installs the Mintlify skill, which gives Claude Code:
+
+    - Mintlify component reference (`<Steps>`, `<Card>`, `<CodeGroup>`, and more)
+    - Writing standards and style guidance
+    - Workflow guidance for documentation tasks
+  </Step>
+
+  <Step title="Customize project instructions">
+    Edit `AGENTS.md` in your project root to add project-specific context:
+
+    - Product terminology and preferred usage
+    - Style preferences specific to your docs
+    - Content boundaries — what should and shouldn't be documented
+
+    Claude Code reads `AGENTS.md` automatically, so any context you add shapes every response in your project.
+
+    <Note>
+      The more specific your `AGENTS.md`, the more consistent Claude Code's output will be. Add your product's key terms and any style rules that differ from the defaults.
+    </Note>
+  </Step>
+
+  <Step title="Start writing with Claude Code">
+    Launch Claude Code from your docs directory:
+
+    ```bash
+    claude
+    ```
+
+    From here, ask Claude Code to draft new pages, add Mintlify components, or refactor existing content — it will apply the skill and your project instructions automatically.
+  </Step>
+</Steps>
