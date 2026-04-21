@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "CFA in 30 days",
+  "name": "Mint Starter Kit CFA",
   "colors": {
     "primary": "#16A34A",
     "light": "#07C983",
@@ -11,35 +11,65 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "CFA Level I",
+        "tab": "Guides",
         "groups": [
-            {
-            "group": "Equity",
+          {
+            "group": "Getting started",
             "pages": [
-              "cfa-level-i/equity/Capital-Asset-Pricing-Model"
+              "index",
+              "quickstart",
+              "development"
             ]
           },
           {
-            "group": "Fixed Income",
+            "group": "Customization",
             "pages": [
-              "cfa-level-i/fixed-income/init",
-              "cfa-level-i/fixed-income/oauth"
+              "essentials/settings",
+              "essentials/navigation"
             ]
           },
           {
-            "group": "Economics",
+            "group": "Writing content",
             "pages": [
-              "cfa-level-i/economics/get",
-              "cfa-level-i/economics/create",
-              "cfa-level-i/economics/delete",
-              "cfa-level-i/economics/webhook"
+              "essentials/markdown",
+              "essentials/code",
+              "essentials/images",
+              "essentials/reusable-snippets"
             ]
           },
           {
-            "group": "Portfolio Management",
+            "group": "AI tools",
             "pages": [
-              "cfa-level-i/portfolio-management/init",
-              "cfa-level-i/portfolio-management/oauth"
+              "ai-tools/cursor",
+              "ai-tools/claude-code",
+              "ai-tools/windsurf"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API reference",
+        "groups": [
+          {
+            "group": "API documentation",
+            "pages": [
+              "api-reference/introduction"
+            ]
+          },
+          {
+            "group": "Endpoint examples",
+            "pages": [
+              "api-reference/endpoint/get",
+              "api-reference/endpoint/create",
+              "api-reference/endpoint/delete",
+              "api-reference/endpoint/webhook"
+            ]
+          },
+          {
+            "group": "CFA",
+            "pages": [
+              "api-reference/CFA/init",
+              "api-reference/CFA/oauth"
             ]
           }
         ]
